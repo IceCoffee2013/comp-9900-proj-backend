@@ -1,6 +1,7 @@
 import json
 import re
 
+
 street_type = {'road', 'street', 'avenue', 'tunnel', 'lane', 'bridge', 'highway', 'parade'}
 
 suburbs = ['Abbotsbury', 'Abbotsford', 'Acacia Gardens', 'Agnes Banks', 'Airds', 'Alexandria', 'Alfords Point',
@@ -151,9 +152,9 @@ dying_info = {'died', 'death', 'deceased', 'dies', 'decedent', 'dying'}
 # died death deceased dies decedent
 speeding_keyword = {'speeding', 'exceed', 'chasing'}
 
-limits_keyword = {"limit zone", "school zone"}
+limits_keyword = {"limit zone", "school zone", "speed limit"}
 
-common_keywords = {'plaintiff', 'defendant', 'prosecution', 'pardon', 'verdict', 'jury', }
+common_keywords = {'plaintiff', 'defendant', 'prosecution', 'pardon', 'verdict', 'jury'}
 
 grammar = '''NP:{<.*>+}
                 }<PRT>*<ADV>*<VERB>*<ADP>*<PRT>*<ADV>*<VERB>+<ADP>*{
@@ -162,7 +163,7 @@ grammar = '''NP:{<.*>+}
 
 date_pattern = r"\d{2}\w\w\s\w*\s\d{4}|\d{2}\s\w*\s\d{4}|\w+\s\d{4}"
 money_pattern = r"(\$([0-9]+(\,[0-9]{3}))*(\.[0-9]{1,3})?)"
-speed_pattern = r"\d+\s?km/?h|\d+\-\d+\s?km/?h|\d+\s?kp/?h|\d+\-\d+\s?kp/?h"
+speed_pattern = r"\d+\s?km/?h|\d+\-\d+\s?km/?h|\d+\s?kp/?h|\d+\-\d+\s?kp/?h|\d+\skilometres per hour|\d+\skms per hour"
 
 
 def read_file(filename):
@@ -263,7 +264,6 @@ def line_analysis(line):
                 result["dying_info"] = dict()
             result["dying_info"][info] = {"index": index, "length": len(info)}
 
-
     dates = re.findall(date_pattern, text)
     if dates:
         for date in dates:
@@ -357,7 +357,6 @@ def line_analysis2(line):
                 result["dying_info"] = []
             result["dying_info"].append(info)
 
-
     dates = re.findall(date_pattern, text)
     if dates:
         for date in dates:
@@ -385,8 +384,6 @@ def line_analysis2(line):
     return json.dumps(result)
 
 
-
-
 def file_analysis(filename):
     lines = open(filename, encoding="utf-8").readlines()
     file_result = []
@@ -399,3 +396,14 @@ def file_analysis(filename):
             file_dict[key].append(i)
         file_result.append(line_result)
     return file_result, file_dict
+
+
+def json_analysis(jsontext):
+    k = json.dumps(jsontext)
+    k = json.loads(k)
+    k = k['judgment_list']
+    re_h = re.compile('</?\w+[^>]*>')
+    for i in range(len(k)):
+        k[i] = re_h.sub('', k[i])
+        k[i] = k[i].replace("\n", ' ')
+    return k
