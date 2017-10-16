@@ -58,7 +58,7 @@ public class LawCase {
     @Getter
     public String catchwords;
 
-    @Column(length = 20000)
+    @Column(length = 200000)
     @Setter
     @Getter
     public String judgment;  // html

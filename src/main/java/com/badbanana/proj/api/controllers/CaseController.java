@@ -22,10 +22,14 @@ public class CaseController {
     private CaseRepository caseRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<LawCase>> getCases() {
+    public ResponseEntity<List<LawCase>> getCases(@RequestParam(value = "searchText", required = false) String searchText) {
 
         List<LawCase> lawCases = new ArrayList<>();
-        lawCases = this.caseRepository.findAll();
+        if (searchText != null && !searchText.isEmpty()) {
+            lawCases = this.caseRepository.findByCaseNameContaining(searchText);
+        } else {
+            lawCases = this.caseRepository.findAll();
+        }
 
         return new ResponseEntity<>(lawCases, HttpStatus.OK);
     }
