@@ -1,6 +1,4 @@
-import json
-import re
-
+import re, json, sys
 
 street_type = {'road', 'street', 'avenue', 'tunnel', 'lane', 'bridge', 'highway', 'parade'}
 
@@ -158,7 +156,7 @@ common_keywords = {'plaintiff', 'defendant', 'prosecution', 'pardon', 'verdict',
 
 grammar = '''NP:{<.*>+}
                 }<PRT>*<ADV>*<VERB>*<ADP>*<PRT>*<ADV>*<VERB>+<ADP>*{
-            VP:{<PRT>*<ADV>*<VERB>*<ADP>*<PRT>*<ADV>*<VERB>+<ADP>*}
+            VP:{<PRT>*<ADV>*<VERB>*<ADP>*<PRT>*<ADV>*<VERB>+<ADP>*}                       
             '''
 
 date_pattern = r"\d{2}\w\w\s\w*\s\d{4}|\d{2}\s\w*\s\d{4}|\w+\s\d{4}"
@@ -407,3 +405,11 @@ def json_analysis(jsontext):
         k[i] = re_h.sub('', k[i])
         k[i] = k[i].replace("\n", ' ')
     return k
+
+
+if __name__ == '__main__':
+    a1 = sys.argv[1]
+    a2 = sys.argv[2]
+    k = line_analysis2(open(a1, "r", encoding="utf-8").read())
+    fp = open(a2, 'w')
+    json.dump(json.loads(k), fp)

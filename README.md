@@ -1,5 +1,4 @@
-# 9322_Poll_Service
-9322_Poll_Service
+# COMP9900 Law Case Parser
 
 organize poll & vote.
 

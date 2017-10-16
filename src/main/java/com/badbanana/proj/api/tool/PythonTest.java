@@ -5,6 +5,8 @@ import org.python.core.PyObject;
 import org.python.core.PyString;
 import org.python.util.PythonInterpreter;
 
+import java.io.*;
+
 /**
  * Created by langley on 15/10/17.
  */
@@ -30,14 +32,67 @@ public class PythonTest {
                 "15\tThe Court orders that: (1)\tPursuant to Civil Procedure Act, s 64 and s 65, JRC Kazzi Investments Pty Limited (ACN 141 174 745) be substituted as ninth defendant in place of Kazzi Investments Pty Limited (ACN 140 032 122).\n" +
                 "16\tBy consent between the plaintiff, and the former ninth defendant, the Court further orders that: (1)\tThe liquidator personally pay the costs of Kazzi Investments Pty Ltd ACN 140 032 122, such costs to be payable forthwith, but not to incur interest if paid within 30 days of assessment or agreement.";
 
-        PythonInterpreter interpreter = new PythonInterpreter();
-        interpreter.execfile("/Users/langley/IdeaProjects/comp-9900-proj-backend/parse.py");
+//        s1.replace("\t\n"," ");
 
-        PyFunction pyfunction = interpreter.get("line_analysis2", PyFunction.class);
-        PyObject pyobj = pyfunction.__call__(new PyString(s1));
+//        PythonInterpreter interpreter = new PythonInterpreter();
+//        interpreter.execfile("/Users/langley/IdeaProjects/comp-9900-proj-backend/parse.py");
+//
+//        PyFunction pyfunction = interpreter.get("line_analysis2", PyFunction.class);
+//        PyObject pyobj = pyfunction.__call__(new PyString(s1));
+//
+//
+//
+//        try {
+//            Runtime.getRuntime().exec("python3 parse.py t1.txt t1.json");
+//        } catch (IOException e) {
+//
+//        }
+//
+//
+//        System.out.println(pyobj);
+        parse(s1);
 
-        System.out.println(pyobj);
+    }
 
+    public static String parse(String data) {
+        String result = "{}";
+
+        String path = "/Users/langley/IdeaProjects/comp-9900-proj-backend/";
+        String pyPath = path + "parse.py";
+        String paramsPath = path + "t1.txt";
+        String returnPath = path + "j1.json";
+
+        try {
+            FileOutputStream fos = new FileOutputStream(paramsPath);
+            OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
+            osw.write(data);
+            osw.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Runtime.getRuntime().exec("python3 " + pyPath + " " + paramsPath + " " + returnPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String tmpContent = ""; // 文件很长的话建议使用StringBuffer
+        try {
+            FileInputStream fis = new FileInputStream(returnPath);
+            InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+            BufferedReader br = new BufferedReader(isr);
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                tmpContent += line;
+                tmpContent += "\r\n"; // 补上换行符
+            }
+            result = tmpContent;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
 }

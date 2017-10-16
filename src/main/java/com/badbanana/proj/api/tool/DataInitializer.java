@@ -22,7 +22,6 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... arg0) throws Exception {
-//        insertPoll();
 //        addCase1();
     }
 
@@ -30,8 +29,9 @@ public class DataInitializer implements CommandLineRunner {
         LawCase c = new LawCase();
         c.setCaseName("In the matter of RCG CBD Pty Ltd");
         c.setMnc("[2016] NSWSC 1938");
-        c.setDecision("24 October 2016");
+        c.setDecision("Ninth defendant substituted. Liquidator personally pay costs.");
         c.setJurisdiction("Equity - Corporations List");
+        c.setDecisionDate("24 October 2016");
         c.setDecision("Ninth defendant substituted. Liquidator personally pay costs");
         c.setCatchwords("CORPORATIONS – winding up – application for substitution of a defendant – present defendant as a result of inquiries made and traces obtained through ATO – whether (NSW) Civil Procedure Act 2005, s 65, applies – clear that liquidator’s intention was to sue person who received payment by company – only reason party was sued was mistaken belief that person in receipt of payment was present defendant – whether substitution should be declined as a matter of discretion – no connection between present ninth defendant and substituted party – present ninth defendant repeatedly brought to liquidator’s attention its mistake – expiry of 3-year limitation period – no evidence of prejudice – application can be brought outside of 3-year period if shelf order obtained");
         c.setCategory("Procedural and other rulings");

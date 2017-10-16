@@ -28,7 +28,7 @@ public class LawCase {
     @Setter
     @Getter
     @Column(length = 512)
-    public String Jurisdiction;
+    public String jurisdiction;
 
     @Setter
     @Getter
