@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.badbanana.poll.api</groupId>
-    <artifactId>9322-poll-service</artifactId>
+    <artifactId>9900-lawcase</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 

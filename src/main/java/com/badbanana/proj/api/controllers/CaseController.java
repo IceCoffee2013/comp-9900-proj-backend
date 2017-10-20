@@ -2,7 +2,7 @@ package com.badbanana.proj.api.controllers;
 
 import com.badbanana.proj.api.model.LawCase;
 import com.badbanana.proj.api.repository.CaseRepository;
-import com.badbanana.proj.api.tool.PythonTest;
+import com.badbanana.proj.api.tool.PythonTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +50,7 @@ public class CaseController {
     @RequestMapping(value = "/tag/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getTagFilter(@PathVariable Long id) {
         LawCase lawCase = this.caseRepository.findOne(id);   // TODO
-        String result = PythonTest.parse(lawCase.getJudgment());
+        String result = PythonTools.parse(lawCase.getJudgment());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

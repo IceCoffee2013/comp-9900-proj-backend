@@ -10,7 +10,7 @@ import java.io.*;
 /**
  * Created by langley on 15/10/17.
  */
-public class PythonTest {
+public class PythonTools {
 
 
     public static void main(String[] args) {
@@ -50,14 +50,15 @@ public class PythonTest {
 //
 //
 //        System.out.println(pyobj);
-        parse(s1);
+        System.out.println(parse(s1));
 
     }
 
     public static String parse(String data) {
         String result = "{}";
 
-        String path = "/Users/langley/IdeaProjects/comp-9900-proj-backend/";
+//        String path = "/Users/langley/IdeaProjects/comp-9900-proj-backend/";
+        String path = "./";
         String pyPath = path + "parse.py";
         String paramsPath = path + "t1.txt";
         String returnPath = path + "j1.json";

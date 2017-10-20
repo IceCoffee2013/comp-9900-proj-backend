@@ -1,9 +1,9 @@
-# COMP9900 Law Case Parser
-
-organize poll & vote.
+# COMP9900 Law Case Parser Back-end
 
 To run the project, clone it, and import it into your favorite IDE.
 The main entry point is MainApplication.java
+
+Server host is http://localhost:8200.
 
 Go to http://localhost:8200/swagger-ui.html for Swagger (API Ref)
 

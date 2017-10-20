@@ -19,3 +19,13 @@ buildNumber.properties
 .idea/modules.xml
 .idea/workspace.xml
 src/test/
+.gradle/
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/kotlinc.xml
+.idea/libraries/
+.idea/uiDesigner.xml
+9900-lawcase.iml
+j1.json
+out/
+t1.txt
